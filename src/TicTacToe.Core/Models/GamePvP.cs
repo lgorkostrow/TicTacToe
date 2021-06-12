@@ -23,7 +23,7 @@ namespace TicTacToe.Core.Models
             
             Board.Mark(index, CurrentPlayer.Marker);
 
-            if (!Board.IsFilled() && !IsWinnerExists())
+            if (!Board.IsFilled() && !Board.IsWinningCombinationExists())
             {
                 CurrentPlayer = Players.First(p => p != CurrentPlayer);
                 
@@ -31,7 +31,7 @@ namespace TicTacToe.Core.Models
             }
 
             Finish();
-            if (IsWinnerExists())
+            if (Board.IsWinningCombinationExists())
             {
                 Winner = CurrentPlayer;
             }

@@ -26,6 +26,11 @@ namespace TicTacToe.Core.Models
                 throw new Exception("Use unique names");
             }
             
+            if (players.Length != players.Select(x => x.Marker).Distinct().ToArray().Length)
+            {
+                throw new Exception("Use unique markers");
+            }
+            
             Players = players;
 
             Board = new Board();
@@ -34,11 +39,6 @@ namespace TicTacToe.Core.Models
         }
 
         public abstract void Mark(int index);
-
-        protected bool IsWinnerExists()
-        {
-            return Board.CheckColumns() || Board.CheckRows() || Board.CheckDiagonals();
-        }
 
         protected void Finish()
         {

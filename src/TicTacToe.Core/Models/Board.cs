@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using TicTacToe.Core.Enums;
 
 namespace TicTacToe.Core.Models
@@ -29,15 +30,7 @@ namespace TicTacToe.Core.Models
 
         public bool IsFilled()
         {
-            foreach (var item in Data)
-            {
-                if (item == EmptyCellValue)
-                {
-                    return false;
-                }
-            }
-
-            return true;
+            return Data.All(item => item != EmptyCellValue);
         }
 
         public bool CheckColumns()
@@ -75,6 +68,63 @@ namespace TicTacToe.Core.Models
             }
             
             return false;
+        }
+
+        public bool IsWinningCombinationExists()
+        {
+            return CheckColumns() || CheckRows() || CheckDiagonals();
+        }
+
+        public MarkerEnum GetWinedMark()
+        {
+            if (!IsWinningCombinationExists())
+            {
+                throw new Exception("No wined combination");
+            }
+
+            if (CheckColumns())
+            {
+                for (int i = 0; i < 3; i++)
+                {
+                    if (Data[i] != " " && Data[i] == Data[i + 3] && Data[i] == Data[i + 6])
+                    {
+                        return (MarkerEnum) Convert.ToChar(Data[i]);
+                    }
+                }
+            }
+
+            if (CheckRows())
+            {
+                for (int i = 0; i < Data.Length; i += 3)
+                {
+                    if (Data[i] != " " && Data[i] == Data[i + 1] && Data[i] == Data[i + 2])
+                    {
+                        return (MarkerEnum) Convert.ToChar(Data[i]);
+                    }
+                }
+            }
+            
+            return (MarkerEnum) Convert.ToChar(Data[4]);
+        }
+
+        internal bool IsCellEmpty(int index)
+        {
+            if (index >= Data.Length)
+            {
+                throw new Exception($"Undefined index {index}");
+            }
+            
+            return Data[index] == EmptyCellValue;
+        }
+        
+        internal void SetToEmptyValue(int index)
+        {
+            if (index >= Data.Length)
+            {
+                throw new Exception($"Undefined index {index}");
+            }
+            
+            Data[index] = EmptyCellValue;
         }
     }
 }

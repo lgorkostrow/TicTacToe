@@ -42,7 +42,7 @@ namespace TicTacToe.Core.Factories
             var players = new Player[]
             {
                 new Player(playerNames[0], MarkerEnum.X),
-                new Player(Player.BotName, MarkerEnum.O),
+                Player.CreateBot(), 
             };
 
             return new GamePvE(players);
