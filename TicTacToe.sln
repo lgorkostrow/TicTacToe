@@ -1,6 +1,14 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TicTacToe", "TicTacToe.csproj", "{966E267B-36DB-4283-A6BD-7718B161355E}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{C95FE0CF-FE01-4A0D-B13F-AF7AE64C40C6}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{AE69CF70-ED8D-4835-8541-4FEA665D41C2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TicTacToe.Console", "src\TicTacToe.Console\TicTacToe.Console.csproj", "{966E267B-36DB-4283-A6BD-7718B161355E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TicTacToe.Core", "src\TicTacToe.Core\TicTacToe.Core.csproj", "{0D334178-B0ED-4D7B-B172-C7A35442280C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TicTacToe.Core.Test", "tests\TicTacToe.Core.Test\TicTacToe.Core.Test.csproj", "{755D15E1-B0C5-4AE3-BE0F-12206190C041}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -12,5 +20,18 @@ Global
 		{966E267B-36DB-4283-A6BD-7718B161355E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{966E267B-36DB-4283-A6BD-7718B161355E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{966E267B-36DB-4283-A6BD-7718B161355E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0D334178-B0ED-4D7B-B172-C7A35442280C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0D334178-B0ED-4D7B-B172-C7A35442280C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0D334178-B0ED-4D7B-B172-C7A35442280C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0D334178-B0ED-4D7B-B172-C7A35442280C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{755D15E1-B0C5-4AE3-BE0F-12206190C041}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{755D15E1-B0C5-4AE3-BE0F-12206190C041}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{755D15E1-B0C5-4AE3-BE0F-12206190C041}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{755D15E1-B0C5-4AE3-BE0F-12206190C041}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{966E267B-36DB-4283-A6BD-7718B161355E} = {C95FE0CF-FE01-4A0D-B13F-AF7AE64C40C6}
+		{0D334178-B0ED-4D7B-B172-C7A35442280C} = {C95FE0CF-FE01-4A0D-B13F-AF7AE64C40C6}
+		{755D15E1-B0C5-4AE3-BE0F-12206190C041} = {AE69CF70-ED8D-4835-8541-4FEA665D41C2}
 	EndGlobalSection
 EndGlobal

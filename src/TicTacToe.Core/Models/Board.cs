@@ -1,10 +1,12 @@
 ﻿using System;
-using System.Text;
+using TicTacToe.Core.Enums;
 
-namespace TicTacToe
+namespace TicTacToe.Core.Models
 {
     public class Board
     {
+        private const string EmptyCellValue = " ";
+        
         public string[] Data { get; } = new string[9];
 
         public Board()
@@ -17,7 +19,7 @@ namespace TicTacToe
 
         public void Mark(int index, MarkerEnum mark)
         {
-            if (Data[index] != " ")
+            if (Data[index] != EmptyCellValue)
             {
                 throw new Exception($"Cell with index: {index} already filled");
             }
@@ -29,61 +31,13 @@ namespace TicTacToe
         {
             foreach (var item in Data)
             {
-                if (item == " ")
+                if (item == EmptyCellValue)
                 {
                     return false;
                 }
             }
 
             return true;
-        }
-
-        public string Print()
-        {
-            var s = new StringBuilder();
-            
-            for (int i = 0; i < Data.Length; i++) 
-            {
-                if ((i + 1) % 3 == 0) 
-                {
-                    s.Append(Data[i]);
-                    
-                    if (i != Data.Length - 1) 
-                    {
-                        s.Append("\n-----\n");
-                    }
-                    
-                    continue;
-                } 
-                
-                s.Append(Data[i] + "|");
-            }
-
-            return s.ToString();
-        }
-
-        public string PrintCells()
-        {
-            var s = new StringBuilder();
-            
-            for (int i = 0; i < Data.Length; i++) 
-            {
-                if ((i + 1) % 3 == 0)
-                {
-                    s.Append(i);
-                    
-                    if (i != Data.Length - 1) 
-                    {
-                        s.Append("\n-----\n");
-                    }
-                    
-                    continue;
-                } 
-                
-                s.Append(i + "|");
-            }
-
-            return s.ToString();
         }
 
         public bool CheckColumns()
@@ -101,7 +55,7 @@ namespace TicTacToe
         
         public bool CheckRows()
         {
-            for (int i = 0; i < 3; i += 3)
+            for (int i = 0; i < Data.Length; i += 3)
             {
                 if (Data[i] != " " && Data[i] == Data[i + 1] && Data[i] == Data[i + 2])
                 {

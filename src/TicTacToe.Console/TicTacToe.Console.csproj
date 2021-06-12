@@ -6,4 +6,8 @@
         <Nullable>enable</Nullable>
     </PropertyGroup>
 
+    <ItemGroup>
+      <ProjectReference Include="..\TicTacToe.Core\TicTacToe.Core.csproj" />
+    </ItemGroup>
+
 </Project>
