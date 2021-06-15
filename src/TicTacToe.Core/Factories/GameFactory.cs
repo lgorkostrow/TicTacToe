@@ -4,9 +4,9 @@ using TicTacToe.Core.Models;
 
 namespace TicTacToe.Core.Factories
 {
-    public class GameFactory
+    public static class GameFactory
     {
-        public Game Create(GameModeEnum gameMode, params string[] playerNames)
+        public static Game Create(GameModeEnum gameMode, params string[] playerNames)
         {
             return gameMode switch
             {
@@ -16,7 +16,7 @@ namespace TicTacToe.Core.Factories
             };
         }
 
-        private Game CreatePvPGame(string[] playerNames)
+        private static Game CreatePvPGame(string[] playerNames)
         {
             if (playerNames.Length != 2)
             {
@@ -32,7 +32,7 @@ namespace TicTacToe.Core.Factories
             return new GamePvP(players);
         }
         
-        private Game CreatePvEGame(string[] playerNames)
+        private static Game CreatePvEGame(string[] playerNames)
         {
             if (playerNames.Length != 1)
             {

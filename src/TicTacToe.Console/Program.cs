@@ -7,7 +7,6 @@ namespace TicTacToe.Console
 {
     class Program
     {
-        private static readonly GameFactory _gameFactory = new GameFactory();
         private static readonly GamePrinter _gamePrinter = new GamePrinter();
 
         static async Task Main(string[] args)
@@ -21,7 +20,7 @@ namespace TicTacToe.Console
             }
             var gameMode = (GameModeEnum) gameModeInt;
 
-            var game = _gameFactory.Create(gameMode, GetPlayersName(gameMode));
+            var game = GameFactory.Create(gameMode, GetPlayersName(gameMode));
 
             while (!game.Finished)
             {

@@ -99,6 +99,30 @@ namespace TicTacToe.Core.Test.Models
             Assert.True(board.CheckDiagonals());
         }
 
+        [Theory]
+        [MemberData(nameof(AllWinedCombinations))]
+        public void ShouldReturnWinedMark(int[] combination, MarkerEnum marker)
+        {
+            var board = new Board();
+
+            foreach (var index in combination)
+            {
+                board.Mark(index, marker);
+            }
+
+            Assert.Equal(marker, board.GetWinedMark());
+        }
+
+        [Fact]
+        public void ShouldThrowExceptionOnCallingGetWinedMarkWithoutWinner()
+        {
+            var board = new Board();
+            
+            Action a = () => board.GetWinedMark();
+            
+            Assert.Throws<Exception>(a);
+        }
+
         public static IEnumerable<object[]> WinningColumnCombinations()
         {
             yield return new object[]
@@ -145,6 +169,57 @@ namespace TicTacToe.Core.Test.Models
             yield return new object[]
             {
                 new int[] {2, 4, 6},
+            };
+        }
+
+        public static IEnumerable<object[]> AllWinedCombinations()
+        {
+            yield return new object[]
+            {
+                new int[] {0, 3, 6},
+                MarkerEnum.X,
+            };
+            
+            yield return new object[]
+            {
+                new int[] {1, 4, 7},
+                MarkerEnum.O,
+            };
+            
+            yield return new object[]
+            {
+                new int[] {2, 5, 8},
+                MarkerEnum.X,
+            };
+            
+            yield return new object[]
+            {
+                new int[] {0, 1, 2},
+                MarkerEnum.O,
+            };
+            
+            yield return new object[]
+            {
+                new int[] {3, 4, 5},
+                MarkerEnum.X,
+            };
+            
+            yield return new object[]
+            {
+                new int[] {6, 7, 8},
+                MarkerEnum.O,
+            };
+            
+            yield return new object[]
+            {
+                new int[] {0, 4, 8},
+                MarkerEnum.X,
+            };
+            
+            yield return new object[]
+            {
+                new int[] {2, 4, 6},
+                MarkerEnum.O,
             };
         }
     }

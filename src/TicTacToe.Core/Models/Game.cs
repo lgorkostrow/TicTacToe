@@ -38,7 +38,33 @@ namespace TicTacToe.Core.Models
             CurrentPlayer = Players.First();
         }
 
-        public abstract void Mark(int index);
+        public virtual void Mark(int index)
+        {
+            if (index < 0 || index > Board.Data.Length - 1)
+            {
+                throw new Exception("Invalid index");
+            }
+            
+            if (Board.IsFilled())
+            {
+                throw new Exception("Board is filled");
+            }
+            
+            Board.Mark(index, CurrentPlayer.Marker);
+
+            if (!Board.IsFilled() && !Board.IsWinningCombinationExists())
+            {
+                CurrentPlayer = Players.First(p => p != CurrentPlayer);
+                
+                return;
+            }
+
+            Finish();
+            if (Board.IsWinningCombinationExists())
+            {
+                Winner = CurrentPlayer;
+            }
+        }
 
         protected void Finish()
         {

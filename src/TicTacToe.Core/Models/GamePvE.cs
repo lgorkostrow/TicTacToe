@@ -1,23 +1,10 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using TicTacToe.Core.Enums;
 
 namespace TicTacToe.Core.Models
 {
-    public class Move
-    {
-        public int MoveIndex { get; }
-        public int Score { get; }
-
-        public Move(int moveIndex, int score)
-        {
-            MoveIndex = moveIndex;
-            Score = score;
-        }
-    }
-    
     public class GamePvE : Game
     {
         private static readonly IDictionary<MarkerEnum, int> Scores = new Dictionary<MarkerEnum, int>()
@@ -32,22 +19,10 @@ namespace TicTacToe.Core.Models
 
         public override void Mark(int index)
         {
-            if (index < 0 || index > Board.Data.Length - 1)
-            {
-                throw new Exception("Invalid index");
-            }
-            
-            if (Board.IsFilled())
-            {
-                throw new Exception("Board is filled");
-            }
-            
-            Board.Mark(index, CurrentPlayer.Marker);
+            base.Mark(index);
 
-            if (!Board.IsFilled() && !Board.IsWinningCombinationExists())
+            if (!Finished)
             {
-                CurrentPlayer = Players.First(p => p != CurrentPlayer);
-
                 var move = FindBestMove();
                 
                 Board.Mark(move, CurrentPlayer.Marker);
@@ -58,14 +33,6 @@ namespace TicTacToe.Core.Models
                     
                     return;
                 }
-                
-                Finish();
-                if (Board.IsWinningCombinationExists())
-                {
-                    Winner = CurrentPlayer;
-                }
-                
-                return;
             }
 
             Finish();
@@ -77,7 +44,7 @@ namespace TicTacToe.Core.Models
 
         private int FindBestMove()
         {
-            if (!IsCurrentPlayerBot())
+            if (!CurrentPlayer.IsBot())
             {
                 throw new Exception("Bot should be a current player");
             }
@@ -153,15 +120,10 @@ namespace TicTacToe.Core.Models
 
             return bestScore;
         }
-        
-        private bool IsCurrentPlayerBot()
-        {
-            return CurrentPlayer.Name == Player.BotName;
-        }
 
         private Player GetBot()
         {
-            var bot = Players.FirstOrDefault(x => x.Name == Player.BotName);
+            var bot = Players.FirstOrDefault(x => x.IsBot());
             if (bot == null)
             {
                 throw new Exception("Bot is not found");
@@ -172,13 +134,25 @@ namespace TicTacToe.Core.Models
         
         private Player GetHuman()
         {
-            var bot = Players.FirstOrDefault(x => x.Name != Player.BotName);
+            var bot = Players.FirstOrDefault(x => !x.IsBot());
             if (bot == null)
             {
                 throw new Exception("Human player is not found");
             }
 
             return bot;
+        }
+    }
+    
+    internal class Move
+    {
+        public int MoveIndex { get; }
+        public int Score { get; }
+
+        public Move(int moveIndex, int score)
+        {
+            MoveIndex = moveIndex;
+            Score = score;
         }
     }
 }
